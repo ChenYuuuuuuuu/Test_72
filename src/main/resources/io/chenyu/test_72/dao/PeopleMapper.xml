@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.chenyu.test_72.dao.PeopleMapper">
+  <resultMap id="BaseResultMap" type="io.chenyu.test_72.po.People">
+    <id column="people_id" jdbcType="INTEGER" property="peopleId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birth" jdbcType="TIMESTAMP" property="birth" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="jianjie" jdbcType="VARCHAR" property="jianjie" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    people_id, name, sex, birth, area, job, jianjie
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zk_people
+    where people_id = #{peopleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zk_people
+    where people_id = #{peopleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="io.chenyu.test_72.po.People">
+    insert into zk_people (people_id, name, sex, 
+      birth, area, job, 
+      jianjie)
+    values (#{peopleId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birth,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{jianjie,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="io.chenyu.test_72.po.People">
+    insert into zk_people
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="peopleId != null">
+        people_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="jianjie != null">
+        jianjie,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="peopleId != null">
+        #{peopleId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="jianjie != null">
+        #{jianjie,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.chenyu.test_72.po.People">
+    update zk_people
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="jianjie != null">
+        jianjie = #{jianjie,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where people_id = #{peopleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.chenyu.test_72.po.People">
+    update zk_people
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=TIMESTAMP},
+      area = #{area,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      jianjie = #{jianjie,jdbcType=VARCHAR}
+    where people_id = #{peopleId,jdbcType=INTEGER}
+  </update>
+</mapper>
